@@ -1,0 +1,17 @@
+name = "PolicyRobustness"
+uuid = "b5f72dee-465d-443d-8467-f2b0410e07a7"
+authors = ["bkraske <bekr4901@colorado.edu>"]
+version = "0.1.0"
+
+[deps]
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+DiscreteValueIteration = "4b033969-44f6-5439-a48b-c11fa3648068"
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+IntervalMDP = "051c988a-e73c-45a4-90ec-875cac0402c7"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+POMDPPolicyGraphs = "5b8982e0-8443-4930-881b-11e527dd11c8"
+POMDPTools = "7588e00f-9cae-40de-98dc-e0c70c48cdd7"
+POMDPs = "a93abf59-7444-517b-a68a-c42f96afdd7d"
+ProgressMeter = "92933f4c-e287-5a05-a399-4b506db050ca"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
