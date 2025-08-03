@@ -12,9 +12,8 @@ end
 
 using Pkg
 Pkg.activate(".")
-Pkg.add(path="../modified_packages/POMDPPolicyGraphs.jl")
-Pkg.add(path="../modified_packages/IntervalMDP.jl")
-Pkg.add(Pkg.PackageSpec(;name="Distributions", version="0.25.115"))
+Pkg.add(url="https://github.com/bkraske/POMDPPolicyGraphs.jl#bkraske-clean-up")
+Pkg.add(url="https://github.com/bkraske/IntervalMDP.jl")
 Pkg.instantiate()
 
 using PolicyRobustness
