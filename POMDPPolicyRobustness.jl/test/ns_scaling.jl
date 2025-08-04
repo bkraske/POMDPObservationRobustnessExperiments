@@ -1,3 +1,4 @@
+include("instantiate_packages.jl")
 using Pkg
 Pkg.activate(".")
 
@@ -23,6 +24,15 @@ using DataFrames
 using Latexify
 using JLD2
 using NativeSARSOP
+using CSV
+using Dates
+today_date = Dates.format(now(),"yyyymmdd_HHmmss")
+function display_and_csv(res,date,name)
+    display(res)
+    display(res[!,:x])
+    CSV.write(date*name*".csv",res)
+    CSV.write(date*name*"_x"*".csv",res[!,:x])
+end
 
 
 #Get Solution Parameters
@@ -100,60 +110,71 @@ h=35
 pomdp33 = make_diagonal_rocks((3,3))
 pol33,up33,b033,s_pomdp33,pg33=soln_params(pomdp33,h;precision=1e-5)
 res33 = rs_scale_run(pomdp33,pg33,h,η)
+display_and_csv(res33,today_date,"res33")
 # @save "rs33_6_22.jld2" res33
 
 pomdp44 = make_diagonal_rocks((4,4))
 pol44,up44,b044,s_pomdp44,pg44=soln_params(pomdp44,h;precision=1e-5)
 res44 = rs_scale_run(pomdp44,pg44,h,η)
+display_and_csv(res44,today_date,"res44")
 # @save "rs44_6_22.jld2" res44
 
 pomdp55 = make_diagonal_rocks((5,5))
 pol55,up55,b055,s_pomdp55,pg55=soln_params(pomdp55,h;precision=1e-5)
 res55 = rs_scale_run(pomdp55,pg55,h,η)
+display_and_csv(res55,today_date,"res55")
 # @save "rs55_6_22.jld2" res55
 
 pomdp66 = make_diagonal_rocks((6,6))
 pol66,up66,b066,s_pomdp66,pg66=soln_params(pomdp66,h;precision=1e-5)
 res66 = rs_scale_run(pomdp66,pg66,h,η)
+display_and_csv(res66,today_date,"res66")
 # @save "rs66_6_22.jld2" res66
 
 pomdp77 = make_diagonal_rocks((7,7))
 pol77,up77,b077,s_pomdp77,pg77=soln_params(pomdp77,h;precision=1e-5)
 res77 = rs_scale_run(pomdp77,pg77,h,η)
+display_and_csv(res77,today_date,"res77")
 # @save "rs77_6_22.jld2" res77
 
 pomdp88 = make_diagonal_rocks((8,8))
 pol88,up88,b088,s_pomdp88,pg88=soln_params(pomdp88,h;precision=1e-5)
 res88 = rs_scale_run(pomdp88,pg88,h,η)
+display_and_csv(res88,today_date,"res88")
 # @save "rs88_6_22.jld2" res88
 
 ##Tiger Scaling with Horizon
-# h=3
-# pomdp3 = fixhorizon( TigerPOMDP(),h)
-# pol3,up3,b03,s_pomdp3,pg3=soln_params(pomdp3,h+1;precision=1e-5);
-# res3 = tiger_scale_run(pomdp3,pg3,h+1,η)
-# # @save "t3_6_20.jld2" res3
+h=3
+pomdp3 = fixhorizon( TigerPOMDP(),h)
+pol3,up3,b03,s_pomdp3,pg3=soln_params(pomdp3,h+1;precision=1e-5);
+res3 = tiger_scale_run(pomdp3,pg3,h+1,η)
+display_and_csv(res3,today_date,"res3")
+# @save "t3_6_20.jld2" res3
 
-# h=4
-# pomdp4 = fixhorizon( TigerPOMDP(),h)
-# pol4,up4,b04,s_pomdp4,pg4=soln_params(pomdp4,h+1;precision=1e-5);
-# res4 = tiger_scale_run(pomdp4,pg4,h+1,η)
-# # @save "t4_6_20.jld2" res4
+h=4
+pomdp4 = fixhorizon( TigerPOMDP(),h)
+pol4,up4,b04,s_pomdp4,pg4=soln_params(pomdp4,h+1;precision=1e-5);
+res4 = tiger_scale_run(pomdp4,pg4,h+1,η)
+display_and_csv(res4,today_date,"res4")
+# @save "t4_6_20.jld2" res4
 
-# h=5
-# pomdp5 = fixhorizon( TigerPOMDP(),h)
-# pol5,up5,b05,s_pomdp5,pg5=soln_params(pomdp5,h+1;precision=1e-5);
-# res5 = tiger_scale_run(pomdp5,pg5,h+1,η)
-# # @save "t5_6_20.jld2" res5
+h=5
+pomdp5 = fixhorizon( TigerPOMDP(),h)
+pol5,up5,b05,s_pomdp5,pg5=soln_params(pomdp5,h+1;precision=1e-5);
+res5 = tiger_scale_run(pomdp5,pg5,h+1,η)
+display_and_csv(res5,today_date,"res5")
+# @save "t5_6_20.jld2" res5
 
-# h=6
-# pomdp6 = fixhorizon( TigerPOMDP(),h)
-# pol6,up6,b06,s_pomdp6,pg6=soln_params(pomdp6,h+1;precision=1e-5);
-# res6 = tiger_scale_run(pomdp6,pg6,h+1,η)
-# # @save "t6_6_20.jld2" res6
+h=6
+pomdp6 = fixhorizon( TigerPOMDP(),h)
+pol6,up6,b06,s_pomdp6,pg6=soln_params(pomdp6,h+1;precision=1e-5);
+res6 = tiger_scale_run(pomdp6,pg6,h+1,η)
+display_and_csv(res6,today_date,"res6")
+# @save "t6_6_20.jld2" res6
 
-# h=7
-# pomdp7 = fixhorizon( TigerPOMDP(),h)
-# pol7,up7,b07,s_pomdp7,pg7=soln_params(pomdp7,h+1;precision=1e-5);
-# res7 = tiger_scale_run(pomdp7,pg7,h+1,η)
-# # @save "t7_6_20.jld2" res7
+h=7
+pomdp7 = fixhorizon( TigerPOMDP(),h)
+pol7,up7,b07,s_pomdp7,pg7=soln_params(pomdp7,h+1;precision=1e-5);
+res7 = tiger_scale_run(pomdp7,pg7,h+1,η)
+display_and_csv(res7,today_date,"res7")
+# @save "t7_6_20.jld2" res7

@@ -1,3 +1,4 @@
+include("instantiate_packages.jl")
 using Pkg
 Pkg.activate(".")
 

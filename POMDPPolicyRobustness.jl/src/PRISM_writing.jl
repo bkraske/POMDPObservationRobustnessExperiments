@@ -364,9 +364,10 @@ function eval_STORM(filename::String,default_params::Vector,x::Float64,h::Int;ro
         region_list *= region_str
     end
     prop_name = filename[7:end-2]*"props"
-    prop_path = "../../MyDocker/STORM/"*prop_name
+    src_path = joinpath(dirname(pwd()),"STORMFiles")
+    prop_path = joinpath(src_path,prop_name)
     write_props(region_list,tol,h;filename=prop_path)
-    my_cmd = ["docker", "run", "--mount", "type=bind,source=/home/bkraske/Documents/Research/MyDocker/STORM,target=/data","-w","/opt/storm/build/bin","--rm", "-it","--name", "storm", "movesrwth/storm:stable", "storm-pars", "--mode", "feasibility", "--feasibility:method", "pla", "--prism", filename, "--prop", "R=? [C<=$(h+1)]", "--direction", "min", "--region",  filename[1:6]*prop_name,  "--guarantee", string(tol), "abs"] #,  "--timemem"]#,"--exportresult", "/data/myresult.json"]
+    my_cmd = ["docker", "run", "--mount", "type=bind,source=$src_path,target=/data","-w","/opt/storm/build/bin","--rm", "-it","--name", "storm", "movesrwth/storm:stable", "storm-pars", "--mode", "feasibility", "--feasibility:method", "pla", "--prism", filename, "--prop", "R=? [C<=$(h+1)]", "--direction", "min", "--region",  filename[1:6]*prop_name,  "--guarantee", string(tol), "abs"] #,  "--timemem"]#,"--exportresult", "/data/myresult.json"]
     all_cmd = Cmd(my_cmd) #,storm_cmd]) #`eval $bash_cmd`#Cmd([bash_cmd])#,storm_cmd])
 
     if verbose
@@ -379,49 +380,9 @@ function eval_STORM(filename::String,default_params::Vector,x::Float64,h::Int;ro
     return parse_pipe_with_time("out.text")
 end
 
-# ##Test Storm Verification Mode
-# function eval_STORM_verif(filename::String,default_params::Vector,x::Float64,h::Int,valu::Float64;rounding_digits=10,tol=1e-7,verbose=true,eps_pres=0.01)
-#     verbose && @info "Preserving structure with probability: $eps_pres"
-#     region_list = ""
-#     for (i,p) in enumerate(default_params)
-#         if p == 0.0
-#             up_clamp = 1-eps_pres
-#             low_clamp = 0.0
-#         elseif p == 1.0
-#             up_clamp = 1.0
-#             low_clamp = eps_pres
-#         else
-#             up_clamp = 1-eps_pres
-#             low_clamp = eps_pres
-#         end
-#             lb = round(clamp(p-x,low_clamp,up_clamp),digits=rounding_digits)
-#             ub = round(clamp(p+x,low_clamp,up_clamp),digits=rounding_digits)
-#         if i == length(default_params)
-#             region_str = "$lb<=p$i<=$ub"
-#         else
-#             region_str = "$lb<=p$i<=$ub,"
-#         end
-#         region_list *= region_str
-#     end
-#     prop_name = filename[7:end-2]*"props"
-#     prop_path = "../../MyDocker/STORM/"*prop_name
-#     write_props(region_list,tol,h;filename=prop_path)
-#     my_cmd = ["docker", "run", "--mount", "type=bind,source=/home/bkraske/Documents/Research/MyDocker/STORM,target=/data","-w","/opt/storm/build/bin","--rm", "-it","--name", "storm", "movesrwth/storm:stable", "storm-pars", "--mode", "verification", "--prism", filename, "--prop", "R>=$valu [C<=$(h+1)]", "--region",  filename[1:6]*prop_name,] #,  "--timemem"]#,"--exportresult", "/data/myresult.json"]
-#     all_cmd = Cmd(my_cmd) #,storm_cmd]) #`eval $bash_cmd`#Cmd([bash_cmd])#,storm_cmd])
-
-#     if verbose
-#         run(pipeline(all_cmd,`tee out.text`)) #Find a way of logging this all
-#     else
-#         run(pipeline(all_cmd,"out.text")) #FIX SYNTAX!!!
-#     end
-
-#     # return parse_pipe("out.text")
-#     return parse_pipe_with_time("out.text")
-# end
-
 #Value of MC using Storm
 function get_storm_value(pomdp::POMDP, pol_graph::PolicyGraph, x::Float64, horizon::Int; filename::String="mypomdp.pm",sticky=false,eps_pres=0.01)
-    param_vals = write_mc_transition(pomdp,pol_graph;filename="../../MyDocker/STORM/"*filename,sticky=sticky)
+    param_vals = write_mc_transition(pomdp,pol_graph;filename=joinpath(dirname(pwd()),"STORMFiles",filename),sticky=sticky)
     return eval_STORM("/data/"*filename,param_vals,x,horizon;eps_pres=eps_pres)
 end
 
@@ -431,7 +392,7 @@ end
 
 ##Percent-based Code for finding x
 function find_x_pct_storm(pomdp::POMDP, pol_graph::PolicyGraph, horizon::Int, per_deg::Float64; filename::String="mypomdp.pm",sticky=false,verbose=true)
-    param_vals = write_mc_transition(pomdp,pol_graph;filename="../../MyDocker/STORM/"*filename,sticky=sticky)
+    param_vals = write_mc_transition(pomdp,pol_graph;filename=joinpath(dirname(pwd()),"STORMFiles",filename),sticky=sticky)
     V,t1 = eval_STORM("/data/"*filename,param_vals,0.0,horizon;verbose=verbose)
     @info "First call time: $t1"
     δV = per_deg*abs(V)
@@ -444,7 +405,7 @@ end
 
 ##Value-based Code for finding x
 function find_x_storm(pomdp::POMDP, pol_graph::PolicyGraph, horizon::Int, δV::Float64; filename::String="mypomdp.pm",sticky=false,verbose=true)
-    param_vals = write_mc_transition(pomdp,pol_graph;filename="../../MyDocker/STORM/"*filename,sticky=sticky)
+    param_vals = write_mc_transition(pomdp,pol_graph;filename=joinpath(dirname(pwd()),"STORMFiles",filename),sticky=sticky)
     V,t1 = eval_STORM("/data/"*filename,param_vals,0.0,horizon;verbose=verbose)
     @info "First call time: $t1"
     # δV = V-value

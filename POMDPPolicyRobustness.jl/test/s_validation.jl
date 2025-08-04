@@ -1,3 +1,4 @@
+include("instantiate_packages.jl")
 using Pkg
 Pkg.activate(".")
 
@@ -23,6 +24,18 @@ using Latexify
 using JLD2
 using NativeSARSOP
 # import SARSOP
+using CSV
+using Dates
+today_date = Dates.format(now(),"yyyymmdd_HHmmss")
+function display_and_csv(res,date,name)
+    display(res[1])
+    display(res[2])
+    @info "Worst POMDP"
+    display(worst_vals(res[3]))
+    for i in 1:3
+        CSV.write(date*name*string(i)*".csv",res[i])
+    end
+end
 
 function soln_params(pomdp::POMDP,h::Int)
     # pol = solve(SARSOPSolver(precision=1e-5),pomdp)
@@ -62,7 +75,7 @@ function soln_params2(pomdp::POMDP,h::Int;precision=1e-5)
 end
 
 function eval_x_STORM(sim::MCSim,x::Float64,η_target::Float64,sticky::Bool,filename::String;verbose=true)
-    param_vals = write_mc_transition(sim.pomdp,sim.pg;filename="../../MyDocker/STORM/"*filename,sticky=sticky)
+    param_vals = write_mc_transition(sim.pomdp,sim.pg;filename=joinpath(dirname(pwd()),"STORMFiles",filename),sticky=sticky)
     valu,_ = eval_STORM("/data/"*filename,param_vals,x,sim.h;verbose=verbose)
     V_star,_ = eval_STORM("/data/"*filename,param_vals,0.0,sim.h;verbose=verbose) #Note - don't use the sim-stored value as it will differ
     return DataFrame(:Model=> string(sim.pomdp), :Horizon => sim.h, :η_target => η_target, :x => x, :η => pct_calc(valu,V_star), :PLA_Worst => valu)

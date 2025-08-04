@@ -1,3 +1,4 @@
+include("instantiate_packages.jl")
 using Pkg
 Pkg.activate(".")
 
@@ -23,6 +24,19 @@ using DataFrames
 using Latexify
 using JLD2
 using NativeSARSOP
+using CSV
+using Dates
+today_date = Dates.format(now(),"yyyymmdd_HHmmss")
+function display_and_csv(res,date,name)
+    display(res[1])
+    @info "Worst MC"
+    display(worst_vals(res[2]))
+    @info "Worst POMDP"
+    display(worst_vals(res[3]))
+    for i in 1:3
+        CSV.write(date*name*string(i)*".csv",res[i])
+    end
+end
 
 
 #Get Solution Parameters
@@ -76,6 +90,7 @@ tiger_param_set = 0.05:0.2:1.0
 tiger_horizon = 100
 tiger_runs = 100_000
 tigerdfs = sim_set(tiger,tiger_param_set,tiger_runs,tiger_horizon)
+display_and_csv(tigerdfs,today_date,"tigerdfs")
 # @save "tigeres_inf_6_19.jld2" tigerdfs
 
 #Baby
@@ -84,6 +99,7 @@ baby_param_set = 0.05:0.2:1.0
 baby_horizon = 31
 baby_runs = 200_000
 babydfs = sim_set(baby,baby_param_set,baby_runs,baby_horizon)
+display_and_csv(babydfs,today_date,"babydfs")
 # @save "babyres_inf_6_19.jld2" babydfs
 
 #RS
@@ -92,4 +108,5 @@ rs_param_set = 0.05:0.2:1.0
 rs_horizon = 31
 rs_runs = 100_000
 rsdfs = sim_set(rs,rs_param_set,rs_runs,rs_horizon)
+display_and_csv(rsdfs,today_date,"rsdfs")
 # @save "rsres_inf_6_19.jld2" rsdfs

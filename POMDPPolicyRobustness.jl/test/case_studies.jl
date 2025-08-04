@@ -1,20 +1,6 @@
-cur_dir = pwd()
-@show bn = basename(cur_dir)
-
-if bn == "POMDPObservationRobustnessExperiments"
-    @show joinpath(cur_dir,"POMDPPolicyRobustness.jl")
-    cd(joinpath(cur_dir,"POMDPPolicyRobustness.jl"))
-elseif bn == "POMDPPolicyRobustness.jl"
-    nothing
-else
-    throw("Directory Not Recongnized")
-end
-
+include("instantiate_packages.jl")
 using Pkg
 Pkg.activate(".")
-Pkg.add(url="https://github.com/bkraske/POMDPPolicyGraphs.jl#bkraske-clean-up")
-Pkg.add(url="https://github.com/bkraske/IntervalMDP.jl")
-Pkg.instantiate()
 
 using PolicyRobustness
 using POMDPs
@@ -101,6 +87,7 @@ plt=plot([param_x1_storm,param_x2_storm],[offset_x1_storm,offset_x2_storm],label
 # savefig(plt,"partplot_storm.pdf")
 # @save "PartCheckStorm_715.jld2" x1_list_storm x2_list_storm param_x1_storm param_x2_storm
 
+
 ## Toy Rover
 my_pgs = PolicyGraph([6,1,1,2,4],
                     Dict((1,1)=>2,(1,2)=>3, #Check if in [1,2] or [3,4]
@@ -116,10 +103,10 @@ srpomdp = SDBatteryPOMDP(max_fuel=30,sand_sensor_efficiency=0.99,per_step_rew=-0
 
 st_mat,sr_mat,sis = pg_to_mc(srpomdp,my_pgs)
 sr_horizon = 5
-δ = find_x_pct(st_mat,sis,PolicyRobustness.make_finite_spec(srpomdp,sr_mat,sr_horizon),0.1;eps_pres=0.01,eps_bisect=1e-5)
+@show δ = find_x_pct(st_mat,sis,PolicyRobustness.make_finite_spec(srpomdp,sr_mat,sr_horizon),0.1;eps_pres=0.01,eps_bisect=1e-5)
 
 function find_x_pct_storm_short(pomdp::POMDP, pol_graph::PolicyGraph, horizon::Int, per_deg::Float64; filename::String="mypomdp.pm",sticky=false,verbose=true,upper_bound=1.0,eps_bisect=1e-7)
-    param_vals = write_mc_transition(pomdp,pol_graph;filename="../../MyDocker/STORM/"*filename,sticky=sticky)
+    param_vals = write_mc_transition(pomdp,pol_graph;filename=joinpath(dirname(pwd()),"STORMFiles",filename),sticky=sticky)
     V,t1 = eval_STORM("/data/"*filename,param_vals,0.0,horizon;verbose=verbose)
     @info "First call time: $t1"
     δV = per_deg*abs(V)
@@ -129,9 +116,9 @@ function find_x_pct_storm_short(pomdp::POMDP, pol_graph::PolicyGraph, horizon::I
     res = PolicyRobustness.upper_bisection_search(x->PolicyRobustness.parse_value_and_time(V-δV,eval_STORM("/data/"*filename,param_vals,x,horizon;verbose=verbose)),0.0,upper_bound;max_iters=1000,eps=eps_bisect)
     return res[1],res[2]+t1
 end
-δ2 = find_x_pct_storm_short(srpomdp,my_pgs,sr_horizon,0.1;sticky=true,verbose=true,upper_bound=0.12,eps_bisect=1e-5)
+@show δ2 = find_x_pct_storm_short(srpomdp,my_pgs,sr_horizon,0.1;sticky=true,verbose=true,upper_bound=0.12,eps_bisect=1e-5)
 
-rover_param_vals_s = write_mc_transition(srpomdp,my_pgs;filename="../../MyDocker/STORM/rover_s.pm",sticky=true)
+rover_param_vals_s = write_mc_transition(srpomdp,my_pgs;filename=joinpath(dirname(pwd()),"STORMFiles","rover_s.pm"),sticky=true)
 rover_val_s_s = PolicyRobustness.eval_STORM("/data/rover_s.pm",rover_param_vals_s,0.1,sr_horizon)
 rover_val_ipe,Tmin = PolicyRobustness.get_value_withT(st_mat,sis,PolicyRobustness.make_finite_spec(srpomdp,sr_mat,sr_horizon),0.1;eps_pres=0.01)
 @show rover_val_s_s[1]
