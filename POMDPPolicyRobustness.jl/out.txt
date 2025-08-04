@@ -1,0 +1,49 @@
+Storm-pars 1.10.0
+
+Date: Mon Aug  4 19:47:47 2025
+Command line arguments: --mode feasibility '--feasibility:method' pla --prism /data/rover_s.pm --prop 'R=? [C<=6]' --direction min --region /data/rover_s.props --guarantee 1.0e-7 abs
+Current working directory: /opt/storm/build/bin
+
+Time for model input parsing: 0.010s.
+
+Time for model construction: 0.017s.
+
+-------------------------------------------------------------- 
+Model type: 	DTMC (sparse)
+States: 	23
+Transitions: 	38
+Reward Models:  (default)
+State Labels: 	2 labels
+   * deadlock -> 0 item(s)
+   * init -> 1 item(s)
+Choice Labels: 	none
+-------------------------------------------------------------- 
+
+Time for model simplification: 0.000s.
+
+-------------------------------------------------------------- 
+Model type: 	DTMC (sparse)
+States: 	20
+Transitions: 	35
+Reward Models:  (default)
+State Labels: 	2 labels
+   * init -> 1 item(s)
+   * deadlock -> 0 item(s)
+Choice Labels: 	none
+-------------------------------------------------------------- 
+
+Time for model preprocessing: 0.000s.
+
+-------------------------------------------------------------- 
+Model type: 	DTMC (sparse)
+States: 	20
+Transitions: 	35
+Reward Models:  (default)
+State Labels: 	2 labels
+   * init -> 1 item(s)
+   * deadlock -> 0 item(s)
+Choice Labels: 	none
+-------------------------------------------------------------- 
+Find feasible solution for  R=? [C<=6] within region 89/100<=p1<=99/100,1/100<=p2<=11/100,89/100<=p3<=99/100,1/100<=p4<=11/100,89/100<=p5<=99/100,89/100<=p6<=99/100,1/100<=p7<=11/100,1/100<=p8<=11/100;
+Result at initial state: 1918758797120133/2251799813685248 ( approx. 0.8521000781) at [p1=46661647/52428800, p2=5767163/52428800, p3=46661637/52428800, p4=5767163/52428800, p5=46661637/52428800, p6=46661637/52428800, p7=5767163/52428800, p8=5767163/52428800].
+Time for model checking: 157.874s.

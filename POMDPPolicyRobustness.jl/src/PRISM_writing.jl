@@ -371,13 +371,17 @@ function eval_STORM(filename::String,default_params::Vector,x::Float64,h::Int;ro
     all_cmd = Cmd(my_cmd) #,storm_cmd]) #`eval $bash_cmd`#Cmd([bash_cmd])#,storm_cmd])
 
     if verbose
-        run(pipeline(all_cmd,`tee out.text`)) #Find a way of logging this all
+        if Sys.iswindows()
+            run(pipeline(all_cmd,`powershell /c Tee-Object out.txt`))
+        else
+            run(pipeline(all_cmd,`tee out.txt`))
+        end
     else
-        run(pipeline(all_cmd,"out.text")) #FIX SYNTAX!!!
+        run(pipeline(all_cmd,"out.txt"))
     end
 
-    # return parse_pipe("out.text")
-    return parse_pipe_with_time("out.text")
+    # return parse_pipe("out.txt")
+    return parse_pipe_with_time("out.txt")
 end
 
 #Value of MC using Storm
