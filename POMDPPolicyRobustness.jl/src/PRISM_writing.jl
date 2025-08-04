@@ -367,7 +367,7 @@ function eval_STORM(filename::String,default_params::Vector,x::Float64,h::Int;ro
     src_path = joinpath(dirname(pwd()),"STORMFiles")
     prop_path = joinpath(src_path,prop_name)
     write_props(region_list,tol,h;filename=prop_path)
-    my_cmd = ["docker", "run", "--mount", "type=bind,source=$src_path,target=/data","-w","/opt/storm/build/bin","--rm", "-it","--name", "storm", "movesrwth/storm:stable", "storm-pars", "--mode", "feasibility", "--feasibility:method", "pla", "--prism", filename, "--prop", "R=? [C<=$(h+1)]", "--direction", "min", "--region",  filename[1:6]*prop_name,  "--guarantee", string(tol), "abs"] #,  "--timemem"]#,"--exportresult", "/data/myresult.json"]
+    my_cmd = ["docker", "run", "--mount", "type=bind,source=$src_path,target=/data","-w","/opt/storm/build/bin","--rm", "-it","--name", "storm", "movesrwth/storm:1.9.0", "storm-pars", "--mode", "feasibility", "--feasibility:method", "pla", "--prism", filename, "--prop", "R=? [C<=$(h+1)]", "--direction", "min", "--region",  filename[1:6]*prop_name,  "--guarantee", string(tol), "abs"] #,  "--timemem"]#,"--exportresult", "/data/myresult.json"]
     all_cmd = Cmd(my_cmd) #,storm_cmd]) #`eval $bash_cmd`#Cmd([bash_cmd])#,storm_cmd])
 
     if verbose

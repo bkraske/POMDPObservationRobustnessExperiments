@@ -1,17 +1,17 @@
-Storm-pars 1.10.0
+Storm-pars 1.9.0
 
-Date: Mon Aug  4 21:06:55 2025
+Date: Mon Aug  4 21:16:34 2025
 Command line arguments: --mode feasibility '--feasibility:method' pla --prism /data/mypomdp.pm --prop 'R=? [C<=36]' --direction min --region /data/mypomdp.props --guarantee 1.0e-7 abs
 Current working directory: /opt/storm/build/bin
 
-Time for model input parsing: 0.013s.
+Time for model input parsing: 0.120s.
 
-Time for model construction: 0.013s.
+Time for model construction: 0.078s.
 
 -------------------------------------------------------------- 
 Model type: 	DTMC (sparse)
-States: 	19
-Transitions: 	24
+States: 	39
+Transitions: 	48
 Reward Models:  (default)
 State Labels: 	2 labels
    * deadlock -> 0 item(s)
@@ -23,8 +23,8 @@ Time for model simplification: 0.000s.
 
 -------------------------------------------------------------- 
 Model type: 	DTMC (sparse)
-States: 	19
-Transitions: 	24
+States: 	39
+Transitions: 	48
 Reward Models:  (default)
 State Labels: 	2 labels
    * init -> 1 item(s)
@@ -36,8 +36,8 @@ Time for model preprocessing: 0.000s.
 
 -------------------------------------------------------------- 
 Model type: 	DTMC (sparse)
-States: 	19
-Transitions: 	24
+States: 	39
+Transitions: 	48
 Reward Models:  (default)
 State Labels: 	2 labels
    * init -> 1 item(s)
@@ -57,15 +57,183 @@ Choice Labels: 	none
  WARN (ParameterRegionParser.cpp:47): Could not find parameter p11 in the set of considered variables. Ignoring this parameter.
  WARN (ParameterRegionParser.cpp:47): Could not find parameter p12 in the set of considered variables. Ignoring this parameter.
  WARN (ParameterRegionParser.cpp:47): Could not find parameter p13 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p14 in the set of considered variables. Ignoring this parameter.
  WARN (ParameterRegionParser.cpp:47): Could not find parameter p15 in the set of considered variables. Ignoring this parameter.
  WARN (ParameterRegionParser.cpp:47): Could not find parameter p16 in the set of considered variables. Ignoring this parameter.
  WARN (ParameterRegionParser.cpp:47): Could not find parameter p17 in the set of considered variables. Ignoring this parameter.
  WARN (ParameterRegionParser.cpp:47): Could not find parameter p18 in the set of considered variables. Ignoring this parameter.
  WARN (ParameterRegionParser.cpp:47): Could not find parameter p19 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p20 in the set of considered variables. Ignoring this parameter.
  WARN (ParameterRegionParser.cpp:47): Could not find parameter p21 in the set of considered variables. Ignoring this parameter.
  WARN (ParameterRegionParser.cpp:47): Could not find parameter p22 in the set of considered variables. Ignoring this parameter.
  WARN (ParameterRegionParser.cpp:47): Could not find parameter p23 in the set of considered variables. Ignoring this parameter.
  WARN (ParameterRegionParser.cpp:47): Could not find parameter p24 in the set of considered variables. Ignoring this parameter.
-Find feasible solution for  R=? [C<=36] within region 1/100<=p14<=2153286507/10000000000,7846713493/10000000000<=p20<=99/100;
-Result at initial state: 5023403282028141/281474976710656 ( approx. 17.84671355) at [p14=72252303622362517/335544320000000000, p20=263292016377637483/335544320000000000].
-Time for model checking: 0.007s.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p25 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p26 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p27 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p28 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p29 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p30 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p31 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p32 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p33 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p34 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p35 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p36 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p37 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p38 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p39 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p40 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p41 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p42 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p43 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p44 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p45 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p46 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p47 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p48 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p49 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p50 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p51 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p52 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p53 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p54 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p55 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p56 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p57 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p58 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p59 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p60 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p61 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p62 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p63 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p64 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p65 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p66 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p67 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p68 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p69 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p70 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p71 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p72 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p73 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p74 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p75 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p76 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p77 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p78 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p79 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p80 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p81 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p82 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p83 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p84 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p85 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p86 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p87 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p88 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p89 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p90 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p91 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p92 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p93 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p94 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p95 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p96 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p97 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p98 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p99 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p100 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p101 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p102 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p103 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p104 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p105 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p106 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p107 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p108 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p109 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p110 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p111 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p112 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p113 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p114 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p115 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p116 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p117 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p118 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p119 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p120 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p121 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p122 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p123 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p124 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p125 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p126 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p127 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p128 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p129 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p130 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p131 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p132 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p133 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p135 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p136 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p137 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p138 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p139 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p140 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p141 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p142 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p143 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p144 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p145 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p146 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p147 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p148 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p149 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p150 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p151 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p152 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p153 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p154 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p155 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p156 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p157 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p158 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p159 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p160 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p161 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p162 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p163 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p164 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p165 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p167 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p168 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p169 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p170 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p171 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p172 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p173 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p174 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p175 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p176 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p177 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p178 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p179 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p180 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p181 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p182 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p183 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p184 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p185 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p186 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p187 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p188 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p189 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p190 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p191 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p192 in the set of considered variables. Ignoring this parameter.
+Find feasible solution for  R=? [C<=36] within region 1/100<=p134<=1326643313/5000000000,3673356687/5000000000<=p166<=99/100;
+Result at initial state: 1572510161981219/70368744177664 ( approx. 22.34671345) at [p134=44514761557669903/167772160000000000, p166=123257398442330097/167772160000000000].
+Time for model checking: 0.008s.
