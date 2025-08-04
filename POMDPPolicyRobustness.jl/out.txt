@@ -1,17 +1,17 @@
 Storm-pars 1.10.0
 
-Date: Mon Aug  4 19:47:47 2025
-Command line arguments: --mode feasibility '--feasibility:method' pla --prism /data/rover_s.pm --prop 'R=? [C<=6]' --direction min --region /data/rover_s.props --guarantee 1.0e-7 abs
+Date: Mon Aug  4 21:06:55 2025
+Command line arguments: --mode feasibility '--feasibility:method' pla --prism /data/mypomdp.pm --prop 'R=? [C<=36]' --direction min --region /data/mypomdp.props --guarantee 1.0e-7 abs
 Current working directory: /opt/storm/build/bin
 
-Time for model input parsing: 0.010s.
+Time for model input parsing: 0.013s.
 
-Time for model construction: 0.017s.
+Time for model construction: 0.013s.
 
 -------------------------------------------------------------- 
 Model type: 	DTMC (sparse)
-States: 	23
-Transitions: 	38
+States: 	19
+Transitions: 	24
 Reward Models:  (default)
 State Labels: 	2 labels
    * deadlock -> 0 item(s)
@@ -23,8 +23,8 @@ Time for model simplification: 0.000s.
 
 -------------------------------------------------------------- 
 Model type: 	DTMC (sparse)
-States: 	20
-Transitions: 	35
+States: 	19
+Transitions: 	24
 Reward Models:  (default)
 State Labels: 	2 labels
    * init -> 1 item(s)
@@ -36,14 +36,36 @@ Time for model preprocessing: 0.000s.
 
 -------------------------------------------------------------- 
 Model type: 	DTMC (sparse)
-States: 	20
-Transitions: 	35
+States: 	19
+Transitions: 	24
 Reward Models:  (default)
 State Labels: 	2 labels
    * init -> 1 item(s)
    * deadlock -> 0 item(s)
 Choice Labels: 	none
 -------------------------------------------------------------- 
-Find feasible solution for  R=? [C<=6] within region 89/100<=p1<=99/100,1/100<=p2<=11/100,89/100<=p3<=99/100,1/100<=p4<=11/100,89/100<=p5<=99/100,89/100<=p6<=99/100,1/100<=p7<=11/100,1/100<=p8<=11/100;
-Result at initial state: 1918758797120133/2251799813685248 ( approx. 0.8521000781) at [p1=46661647/52428800, p2=5767163/52428800, p3=46661637/52428800, p4=5767163/52428800, p5=46661637/52428800, p6=46661637/52428800, p7=5767163/52428800, p8=5767163/52428800].
-Time for model checking: 157.874s.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p1 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p2 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p3 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p4 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p5 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p6 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p7 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p8 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p9 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p10 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p11 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p12 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p13 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p15 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p16 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p17 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p18 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p19 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p21 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p22 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p23 in the set of considered variables. Ignoring this parameter.
+ WARN (ParameterRegionParser.cpp:47): Could not find parameter p24 in the set of considered variables. Ignoring this parameter.
+Find feasible solution for  R=? [C<=36] within region 1/100<=p14<=2153286507/10000000000,7846713493/10000000000<=p20<=99/100;
+Result at initial state: 5023403282028141/281474976710656 ( approx. 17.84671355) at [p14=72252303622362517/335544320000000000, p20=263292016377637483/335544320000000000].
+Time for model checking: 0.007s.

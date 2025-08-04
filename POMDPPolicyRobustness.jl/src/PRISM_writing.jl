@@ -372,7 +372,8 @@ function eval_STORM(filename::String,default_params::Vector,x::Float64,h::Int;ro
 
     if verbose
         if Sys.iswindows()
-            run(pipeline(all_cmd,`powershell /c Tee-Object out.txt`))
+            @warn "Julia: Verbose STORM outputs not supported in Windows. See 'out.txt'."
+            run(pipeline(all_cmd,"out.txt"))
         else
             run(pipeline(all_cmd,`tee out.txt`))
         end

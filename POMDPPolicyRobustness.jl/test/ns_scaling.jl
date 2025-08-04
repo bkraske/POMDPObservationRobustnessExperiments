@@ -29,9 +29,9 @@ using Dates
 today_date = Dates.format(now(),"yyyymmdd_HHmmss")
 function display_and_csv(res,date,name)
     display(res)
-    display(res[!,:x])
+    display(res[!,:x][1])
     CSV.write(date*name*".csv",res)
-    CSV.write(date*name*"_x"*".csv",res[!,:x])
+    CSV.write(date*name*"_x"*".csv",res[!,:x][1])
 end
 
 

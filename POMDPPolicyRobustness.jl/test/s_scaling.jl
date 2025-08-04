@@ -29,9 +29,9 @@ using Dates
 today_date = Dates.format(now(),"yyyymmdd_HHmmss")
 function display_and_csv(res,date,name)
     display(res)
-    display(res[!,:x])
+    display(res[!,:x][1])
     CSV.write(date*name*".csv",res)
-    CSV.write(date*name*"_x"*".csv",res[!,:x])
+    CSV.write(date*name*"_x"*".csv",res[!,:x][1])
 end
 
 
@@ -44,127 +44,6 @@ function soln_params(pomdp::POMDP,h::Int;precision=1e-5)
     pol_graph = PolicyRobustness.gen_polgraph(pomdp, s_pomdp, pol, b0, h; store_beliefs=true)
     return pol,up,b0,s_pomdp,pol_graph
 end
-
-# function soln_params(pomdp::POMDP,h::Int)
-#     pol = solve(SARSOPSolver(precision=1e-5),pomdp)
-#     up = DiscreteUpdater(pomdp)
-#     b0 = initialize_belief(up,initialstate(pomdp))
-#     pol_graph = PolicyRobustness.gen_polgraph(pomdp, pol, b0, h;store_beliefs=true)
-#     return pol,up,b0,pol_graph
-# end
-
-# function undisc_val(pomdp,pg,x,h)
-#     mc, rew, is = pg_to_mc(pomdp,pg)
-#     t_spec = PolicyRobustness.make_finite_spec(pomdp,rew,h)
-#     # @show t_spec
-#     return get_value(mc, is, t_spec, x)
-# end
-
-# function mc_sims(pomdp,pol_graph,h;runs=10000)
-#     b0 = initialize_belief(DiscreteUpdater(pomdp),initialstate(pomdp))
-#     pg_val = PolicyRobustness.calc_belvalue_polgraph(pol_graph, PolicyRobustness.eval_polgraph(pomdp, PolicyRobustness.EvalTabularPOMDP(pomdp), pol_graph; tolerance=1e-7), b0)[1]
-
-#     up2 = PolicyRobustness.PolicyGraphUpdater(pol_graph)
-#     bel02 = initialize_belief(up2,initialstate(pomdp))
-    
-#     simlist2 = [Sim(pomdp, pol_graph, up2, bel02, rand(b0); max_steps=h, rng=MersenneTwister()) for _ in 1:runs]
-#     mc_res_raw2 = run(simlist2) do sim, hist
-#         return [:disc_rew => undiscounted_reward(hist)]
-#     end
-#     # @show pg_val
-#     @show mc_res2 = mean(mc_res_raw2[!, :disc_rew])
-#     @show mc_res_sem2 = 3 * std(mc_res_raw2[!, :disc_rew]) / sqrt(runs)
-#     return mc_res2,mc_res_sem2
-# end
-
-##Test Full Optimization
-# function soln_params2(pomdp::POMDP,h::Int;precision=1e-5)
-#     pol = solve(SARSOPSolver(precision=precision),pomdp)
-#     up = DiscreteUpdater(pomdp)
-#     b0 = initialize_belief(up,initialstate(pomdp))
-#     s_pomdp = EvalTabularPOMDP(pomdp)
-#     pol_graph = PolicyRobustness.gen_polgraph(pomdp, s_pomdp, pol, b0, h; store_beliefs=true)
-#     return pol,up,b0,s_pomdp,pol_graph
-# end
-
-# function eval_x_STORM(sim::MCSim,x::Float64,η_target::Float64,sticky::Bool,filename::String;verbose=true)
-#     param_vals = write_mc_transition(sim.pomdp,sim.pg;filename="../../MyDocker/STORM/"*filename,sticky=sticky)
-#     valu = eval_STORM("/data/"*filename,param_vals,x,sim.h;verbose=verbose)
-#     V_star = eval_STORM("/data/"*filename,param_vals,0.0,sim.h;verbose=verbose) #Note - don't use the sim-stored value as it will differ
-#     return DataFrame(:Model=> string(sim.pomdp), :Horizon => sim.h, :η_target => η_target, :x => x, :η => pct_calc(valu,V_star), :PLA_Worst => valu)
-# end
-
-# function eval_x_STORM(sim::MCSim,xs::Vector{Float64},η_targets::Vector{Float64};sticky=true,filename::String="mypomdp.pm",verbose=true)
-#     df = eval_x_STORM(sim,xs[1],η_targets[1],sticky,filename;verbose=verbose)
-#     for i in 2:length(xs)
-#         df = vcat(df,eval_x_STORM(sim,xs[i],η_targets[i],sticky,filename;verbose=verbose))
-#     end
-#     return df
-# end
-
-
-# #CHANGE Sampling - IS O_MAX LEGIT?
-# function get_pomdp_from_x_storm(sim::MCSim,mod_spomdp,x,η_target,v_star)
-#     id_seed = rand(UInt)
-#     sample_from_z_omax!(mod_spomdp,x;rng=MersenneTwister(id_seed))
-#     mc, rew, is = pg_to_mc(sim.pomdp,mod_spomdp,sim.pg)
-#     spec = make_finite_spec(sim.pomdp,rew,sim.h)
-#     V = get_value(mc, is, spec, 0.0) #Better method for this???
-#     return DataFrame(:Model=> string(sim.pomdp), :Horizon => sim.h, :η_target => η_target, :x => x, :η => pct_calc(V,v_star), :PLA_worst => V,  :sample_id => id_seed)
-# end
-
-# function get_pomdps_from_x_storm(sim::MCSim,x,η_target,n_samples)
-#     s_pomdp = POMDPPolicyGraphs.EvalTabularPOMDP(sim.pomdp)
-#     mod_spomdp = POMDPPolicyGraphs.EvalTabularPOMDP(sim.pomdp)
-
-#     mc, rew, is = pg_to_mc(sim.pomdp,s_pomdp,sim.pg)
-#     spec = make_finite_spec(sim.pomdp,rew,sim.h)
-#     v_star = get_value(mc, is, spec, 0.0) #Better method for this???
-
-#     df = get_pomdp_from_x_storm(sim,mod_spomdp,x,η_target,v_star)
-#     for a in eachindex(s_pomdp.O)
-#         mod_spomdp.O2[a] .= s_pomdp.O2[a]
-#         mod_spomdp.O[a] .= s_pomdp.O[a]
-#     end
-#     @showprogress for _ in 2:n_samples
-#         df = vcat(df,get_pomdp_from_x_storm(sim,mod_spomdp,x,η_target,v_star))
-#         for a in eachindex(s_pomdp.O)
-#             mod_spomdp.O2[a] .= s_pomdp.O2[a]
-#             mod_spomdp.O[a] .= s_pomdp.O[a]
-#         end
-#     end
-#     return df
-# end
-
-# function get_pomdps_from_param_storm(sim::MCSim,xs::Vector{Float64},η_targets::Vector{Float64},n_samples::Int)
-#     @info "x = $(xs[1]) - 1/$(length(xs))"
-#     @info "Using Sim horizon $(sim.h)"
-#     df = get_pomdps_from_x_storm(sim,xs[1],η_targets[1],n_samples)
-#     for i in 2:length(xs)
-#         @info "x = $(xs[i]) - $i/$(length(xs))"
-#         df = vcat(df,get_pomdps_from_x_storm(sim,xs[i],η_targets[i],n_samples))
-#     end
-#     return df
-# end
-
-# function storm_sim(pomdp,param_set,runs,horizon;sticky=false,verbose=true)
-#     param_set = collect(param_set)
-#     pomdp_pol,pomdp_up,pomdp_b0,spomdp,pomdp_pg = soln_params2(pomdp,horizon)
-#     pomdp_sim = PolicyRobustness.MCSim(pomdp,pomdp_pg,horizon)
-#     x_res = η_to_x_storm(pomdp_sim,collect(param_set);sticky=sticky,verbose=verbose)
-#     xs = x_res[!,:x]
-#     df1 = eval_x_STORM(pomdp_sim,xs,param_set;sticky=sticky,filename="mypomdp.pm",verbose=verbose)
-#     df2 = get_pomdps_from_param_storm(pomdp_sim,xs,param_set,runs)
-#     return x_res, df1, df2
-# end
-
-# function udisc_sim(pomdp,param_set,runs,horizon)
-#     param_set = collect(param_set)
-#     pomdp_pol,pomdp_up,pomdp_b0,spomdp,pomdp_pg = soln_params2(pomdp,horizon)
-#     pomdp_sim = PolicyRobustness.MCSim(pomdp,pomdp_pg,horizon)
-#     x_res = η_to_x_udisc(pomdp_sim,collect(param_set))
-#     return x_res
-# end
 
 function make_diagonal_rocks(sz)
     rock_locs = [(1,1)]

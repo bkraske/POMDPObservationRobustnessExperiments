@@ -203,15 +203,16 @@ tigerdt = time()-t0 #Includes starting Docker.
 display(round.(tigerdf1[2][!,:x],digits=4))
 display(round.(tigerdf1[2][!,:η],digits=4))
 display(round.(worst_vals(tigerdf1[3]),digits=4))
-@load "tiger_strm_6_19.jld2"
-tiger_new_pomdps_df = just_z_storm_sim(tiger,tiger_param_set,tiger_runs,ht,tigerdf1[1])
+display_and_csv(tigerdf1,today_date,"stigerdf1")
+# @load "tiger_strm_6_19.jld2"
+# tiger_new_pomdps_df = just_z_storm_sim(tiger,tiger_param_set,tiger_runs,ht,tigerdf1[1])
 
 
-t1 = time()
-tigerdf2 = udisc_sim(tiger,tiger_param_set,tiger_runs,ht)
-tiger_vals = udisc_x_to_finite_val(tiger,tigerdf2,ht)
-tigerdtu = time()-t1
-@info tigerdtu
+# t1 = time()
+# tigerdf2 = udisc_sim(tiger,tiger_param_set,tiger_runs,ht)
+# tiger_vals = udisc_x_to_finite_val(tiger,tigerdf2,ht)
+# tigerdtu = time()-t1
+# @info tigerdtu
 
 ##RS
 h = 20
@@ -231,15 +232,16 @@ rsdt = time()-t0 #Includes starting Docker.
 display(round.(rsdf1[2][!,:x],digits=4))
 display(round.(rsdf1[2][!,:η],digits=4))
 display(round.(worst_vals(rsdf1[3]),digits=4))
-@load "rs_strm_6_19.jld2"
-rs_new_pomdps_df = just_z_storm_sim(rs,rs_param_set,rs_runs,ht,rsdf1[1])
+display_and_csv(rsdf1,today_date,"srsdf1")
+# @load "rs_strm_6_19.jld2"
+# rs_new_pomdps_df = just_z_storm_sim(rs,rs_param_set,rs_runs,ht,rsdf1[1])
 
 
-t1 = time()
-rsdf2 = udisc_sim(rs,rs_param_set,rs_runs,ht)
-rs_vals = udisc_x_to_finite_val(rs,rsdf2,ht)
-rsdtu = time()-t1
-@info rsdtu
+# t1 = time()
+# rsdf2 = udisc_sim(rs,rs_param_set,rs_runs,ht)
+# rs_vals = udisc_x_to_finite_val(rs,rsdf2,ht)
+# rsdtu = time()-t1
+# @info rsdtu
 
 ##Baby
 h = 30
@@ -258,64 +260,12 @@ bbdt = time()-t0 #Includes starting Docker.
 display(round.(bbdf1[2][!,:x],digits=4))
 display(round.(bbdf1[2][!,:η],digits=4))
 display(round.(worst_vals(bbdf1[3]),digits=4))
-@load "bb_strm_6_19.jld2"
-bb_new_pomdps_df = just_z_storm_sim(baby,baby_param_set,baby_runs,ht,bbdf1[1])
+display_and_csv(bbdf1,today_date,"sbbdf1")
+# @load "bb_strm_6_19.jld2"
+# bb_new_pomdps_df = just_z_storm_sim(baby,baby_param_set,baby_runs,ht,bbdf1[1])
 
-t1 = time()
-bbdf2 = udisc_sim(baby,baby_param_set,baby_runs,ht)
-bb_vals = udisc_x_to_finite_val(baby,bbdf2,ht)
-bbdtu = time()-t1
-@info bbdtu
-
-# Checking BabyPOMDP Disagreement in Undiscounted Calculations - PLA vs IPE 
-# -PLA has a constraint to maintain consistent param selection across all horizons as formulated. IPE does not
-
-# Stuff for Finite Horizon without Step in Obs
-POMDPs.observations(w::FiniteHorizonPOMDPs.FixedHorizonPOMDPWrapper) = observations(w.m)
-POMDPTools.ordered_observations(w::FiniteHorizonPOMDPs.FixedHorizonPOMDPWrapper) = ordered_observations(w.m)
-POMDPs.obsindex(w::FiniteHorizonPOMDPs.FixedHorizonPOMDPWrapper,o) = obsindex(w.m,o)
-function POMDPs.observation(w::FiniteHorizonPOMDPs.FixedHorizonPOMDPWrapper{S},a,sp::Tuple{S, Int}) where S 
-    return observation(w.m, a, first(sp))
-end
-POMDPs.obstype(w::FiniteHorizonPOMDPs.FixedHorizonPOMDPWrapper) = obstype(w.m)
-
-my_pg = PolicyGraph([false,true],
-                    Dict((1,false)=>1,(1,true)=>2,
-                         (2,false)=>1,(2,true)=>1
-                        ),
-                    1,SparseVector{Float64, Int64}[],Int64[])
-
-ht = 4
-x = 1.0
-bb2 = fixhorizon(baby,ht)
-val_IPE2_fh = undisc_val(bb2,my_pg,x,ht;eps_pres=0.001)
-val_PLA2_fh = get_storm_value(bb2,my_pg,x,ht;sticky=false,eps_pres=0.001)
-val_IPE = undisc_val(baby,my_pg,x,ht;eps_pres=0.001)
-val_PLA = get_storm_value(baby,my_pg,x,ht;sticky=false,eps_pres=0.001)
-@show val_IPE
-@show val_IPE2_fh
-@info val_IPE-val_IPE2_fh
-@show val_PLA[1]
-@show val_PLA2_fh[1]
-@info val_PLA[1]-val_PLA2_fh[1]
-@info val_IPE-val_PLA2_fh[1]
-val_PLA2_fh_sticky = get_storm_value(bb2,my_pg,x,ht;sticky=true,eps_pres=0.001)
-
-#Misc Utils
-# edge_checker(x) = (bb_pg.edges[(x,false)],bb_pg.edges[(x,true)])
-# worst_case_T_finite(baby,my_pg,x,ht)
-
-# function worst_case_T_finite(pomdp::POMDP,mc::SparseMatrixCSC,rew::SparseVector,is::Int,x::Float64,horizon)
-#     lower_mc, upper_mc = PolicyRobustness.matrix_from_bound(mc, x;eps_pres=0.001)
-
-#     spec = make_finite_spec(pomdp,rew,horizon)
-#     problem = Problem(PolicyRobustness.make_MC(lower_mc,upper_mc,is), spec)
-
-#     V, k, residual, delT = value_iteration(problem;include_T=true) #Uses IntervalMDPs.jl
-#     return V[1]/IntervalMDP.discount(problem.spec.prop), lower_mc .+ delT, is, rew
-# end
-
-# function worst_case_T_finite(pomdp::POMDP,policy_graph::PolicyGraph,x::Float64,h)
-#     mc, rew, is = pg_to_mc(pomdp,policy_graph)
-#     return worst_case_T_finite(pomdp,mc,rew,is,x,h)
-# end
+# t1 = time()
+# bbdf2 = udisc_sim(baby,baby_param_set,baby_runs,ht)
+# bb_vals = udisc_x_to_finite_val(baby,bbdf2,ht)
+# bbdtu = time()-t1
+# @info bbdtu
