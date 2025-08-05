@@ -386,6 +386,11 @@ function eval_STORM(filename::String,default_params::Vector,x::Float64,h::Int;ro
 end
 
 #Value of MC using Storm
+"""
+    get_storm_value(pomdp::POMDP, pol_graph::PolicyGraph, x::Float64, horizon::Int; filename::String="mypomdp.pm",sticky=false,eps_pres=0.01)
+
+Find the value of a finite horizon PODMP and policy graph as a function of x (δ).
+"""
 function get_storm_value(pomdp::POMDP, pol_graph::PolicyGraph, x::Float64, horizon::Int; filename::String="mypomdp.pm",sticky=false,eps_pres=0.01)
     param_vals = write_mc_transition(pomdp,pol_graph;filename=joinpath(dirname(pwd()),"STORMFiles",filename),sticky=sticky)
     return eval_STORM("/data/"*filename,param_vals,x,horizon;eps_pres=eps_pres)
@@ -396,6 +401,11 @@ function parse_value_and_time(gap,vals)
 end
 
 ##Percent-based Code for finding x
+"""
+    find_x_pct_storm(pomdp::POMDP, pol_graph::PolicyGraph, horizon::Int, per_deg::Float64; filename::String="mypomdp.pm",sticky=false,verbose=true)
+    
+Find x (δ) with PLA (STORM) as a function of a percentage degredation with an undiscounted, finite horizon POMDP and policy graph.
+"""
 function find_x_pct_storm(pomdp::POMDP, pol_graph::PolicyGraph, horizon::Int, per_deg::Float64; filename::String="mypomdp.pm",sticky=false,verbose=true)
     param_vals = write_mc_transition(pomdp,pol_graph;filename=joinpath(dirname(pwd()),"STORMFiles",filename),sticky=sticky)
     V,t1 = eval_STORM("/data/"*filename,param_vals,0.0,horizon;verbose=verbose)
@@ -409,6 +419,11 @@ function find_x_pct_storm(pomdp::POMDP, pol_graph::PolicyGraph, horizon::Int, pe
 end
 
 ##Value-based Code for finding x
+"""
+    find_x_storm(pomdp::POMDP, pol_graph::PolicyGraph, horizon::Int, δV::Float64; filename::String="mypomdp.pm",sticky=false,verbose=true)
+    
+Find x (δ) with PLA (STORM) as a function of a value threshold with an undiscounted, finite horizon POMDP and policy graph.
+"""
 function find_x_storm(pomdp::POMDP, pol_graph::PolicyGraph, horizon::Int, δV::Float64; filename::String="mypomdp.pm",sticky=false,verbose=true)
     param_vals = write_mc_transition(pomdp,pol_graph;filename=joinpath(dirname(pwd()),"STORMFiles",filename),sticky=sticky)
     V,t1 = eval_STORM("/data/"*filename,param_vals,0.0,horizon;verbose=verbose)
