@@ -121,10 +121,6 @@ res33 = rs_scale_run_storm(pomdp33,pg33,h,η,sticky=true,verbose=false)
 display_and_csv(res33,today_date,"sres33")
 # @save "rs33_strm_6_19.jld2" res33
 
-# pomdp34 = make_diagonal_rocks((5,6))
-# pol34,up34,b034,s_pomdp34,pg34=soln_params(pomdp34,h;precision=1e-5)
-# res34 = rs_scale_run_storm(pomdp34,pg34,h,η,sticky=true,verbose=true)
-
 pomdp44 = make_diagonal_rocks((4,4))
 pol44,up44,b044,s_pomdp44,pg44=soln_params(pomdp44,h;precision=1e-5)
 res44 = rs_scale_run_storm(pomdp44,pg44,h,η,sticky=true,verbose=false)

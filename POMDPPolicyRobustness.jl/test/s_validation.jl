@@ -207,13 +207,6 @@ display_and_csv(tigerdf1,today_date,"stigerdf1")
 # @load "tiger_strm_6_19.jld2"
 # tiger_new_pomdps_df = just_z_storm_sim(tiger,tiger_param_set,tiger_runs,ht,tigerdf1[1])
 
-
-# t1 = time()
-# tigerdf2 = udisc_sim(tiger,tiger_param_set,tiger_runs,ht)
-# tiger_vals = udisc_x_to_finite_val(tiger,tigerdf2,ht)
-# tigerdtu = time()-t1
-# @info tigerdtu
-
 ##RS
 h = 20
 rs = RockSamplePOMDP(map_size = (3,3),rocks_positions = [(1,1), (2,2), (3,3)],)
@@ -237,12 +230,6 @@ display_and_csv(rsdf1,today_date,"srsdf1")
 # rs_new_pomdps_df = just_z_storm_sim(rs,rs_param_set,rs_runs,ht,rsdf1[1])
 
 
-# t1 = time()
-# rsdf2 = udisc_sim(rs,rs_param_set,rs_runs,ht)
-# rs_vals = udisc_x_to_finite_val(rs,rsdf2,ht)
-# rsdtu = time()-t1
-# @info rsdtu
-
 ##Baby
 h = 30
 baby = BabyPOMDP()
@@ -263,9 +250,3 @@ display(round.(worst_vals(bbdf1[3]),digits=4))
 display_and_csv(bbdf1,today_date,"sbbdf1")
 # @load "bb_strm_6_19.jld2"
 # bb_new_pomdps_df = just_z_storm_sim(baby,baby_param_set,baby_runs,ht,bbdf1[1])
-
-# t1 = time()
-# bbdf2 = udisc_sim(baby,baby_param_set,baby_runs,ht)
-# bb_vals = udisc_x_to_finite_val(baby,bbdf2,ht)
-# bbdtu = time()-t1
-# @info bbdtu

@@ -106,7 +106,7 @@ function make_prob_dicts(pomdp::POMDP, pol_graph::PolicyGraph;up=DiscreteUpdater
                     end
                 end
             else
-                #If a state is terminal, return to that state #CHECK ME
+                #If a state is terminal, return to that state
                 add_or_augment!(t_prob_dict,(ns_map_idx,ns_map_idx),string(1.0))
             end
         end

@@ -33,7 +33,6 @@ c_param_set = 0.0:0.01:1.0
 c_horizon = 50
 c_runs = 500
 cpomdp = CancerPOMDP()
-# cancer_pg = PolicyGraph([:wait,:wait,:wait,:wait,:test,:test,:treat],Dict((1,:negative)=>2,(2,:negative)=>3,(3,:negative)=>4,(4,:negative)=>5,(5,:negative)=>1,(5,:positive)=>6,(6,:positive)=>7,(6,:negative)=>5,(7,:positive)=>1,(7,:negative)=>1),1,SparseVector{Float64, Int64}[],Int64[])
 cancer_pg2 = PolicyGraph([:wait,:wait,:wait,:wait,:test,:test,:treat,:test],Dict((1,:negative)=>2,(2,:negative)=>3,(3,:negative)=>4,(4,:negative)=>5,(5,:negative)=>8,(5,:positive)=>6,(6,:positive)=>7,(6,:negative)=>5,(7,:positive)=>1,(7,:negative)=>1,(8,:negative)=>1,(8,:positive)=>5),1,SparseVector{Float64, Int64}[],Int64[])
 
 csims2 = MCSim(cpomdp,cancer_pg2,c_horizon)
@@ -41,7 +40,6 @@ x2 = η_to_x(csims2,collect(c_param_set))
 
 plot(x2[!,:η_target].*98.53156677380078,x2[!,:x],label="",color = :green,xlabel="Δ - Value Degradation (QALYs)",ylabel="δ - Admissible Observation Deviation",title="Admissible Observation Deviation with Value Degradation",linewidth=2,titlefont=("Computer Modern",13),guidefont=("Computer Modern"),xtickfont=("Computer Modern"),ytickfont=("Computer Modern"))
 #savefig(plot,"name")
-# L"\Delta"* - LaTeXStrings
 
 
 ## Part Checking
