@@ -8,3 +8,4 @@
     - `POMDPPolicyRobustness.jl\test\ns_scaling.jl` for RIS-NS scaling results
     - `POMDPPolicyRobustness.jl\test\s_scaling.jl` for RIS-S scaling results
     - `POMDPPolicyRobustness.jl\test\case_studies.jl` for case studies
+- Note: $\delta$ is referred to as x throughout, $\eta$ refers to a percent degredation of value
